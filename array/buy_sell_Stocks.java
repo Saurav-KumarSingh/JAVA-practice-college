@@ -10,7 +10,7 @@ public class buy_sell_Stocks {
         for (int i = 0; i < price.length; i++) {
             int sellPrice=price[i];
             if(buyPrice<sellPrice){
-                int Profit=sellPrice-buyPrice;
+                int Profit=sellPrice-buyPrice;//today's profit
                 maxProfit=Math.max(maxProfit, Profit);
             }
             else{buyPrice=sellPrice;}
