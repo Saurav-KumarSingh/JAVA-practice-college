@@ -1,41 +1,35 @@
 import java.util.Scanner;
 
 class My_Stack {
-    int[] a; // Stack array
-    int i = 0, j;
-    
-    // Constructor to initialize the stack
-    My_Stack() {
-        a = new int[5]; // Fixed size stack
-    }
+    int[] a = new int[5]; // Initialize the stack array
+    int top = -1;
 
-    public void push(int item) {
-        if (i >= 5) {
+    void push(int item) {
+        if (top >= 4) {  // Maximum index for size 5
             System.out.println("OverFlow..");
-            return; // Exit Push
-        }
-        a[i++] = item; // Push success
-    }
-
-    public void peek() {
-        if (i == 0) {
-            System.out.println("Stack is Empty!");
             return;
         }
-        for (j = 0; j < i; j++)
-            System.out.println(a[j]);
+        a[++top] = item;
     }
 
-    public int pop() {
-        if (i <= 0) {
-            System.out.println("UnderFlow");
-            return -1; // To Tell, operation Failed
+    int pop() {
+        if (top == -1) {
+            System.out.println("UnderFlow..");
+            return -1;
         }
-        return a[--i]; // Return popped value
+        return a[top--];
+    }
+
+    void peek() {
+        if (top == -1) {
+            System.out.println("Stack is empty.");
+            return;
+        }
+        System.out.println("Top element: " + a[top]);
     }
 }
 
-class Stack {
+class Main {
     public static void main(String[] args) {
         System.out.println("\n\n\t\tSTACK OPERATION");
         Scanner in = new Scanner(System.in);
@@ -50,25 +44,28 @@ class Stack {
             System.out.println("Enter your Choice [1,2,3,4] ....");
             cho = in.nextInt();
 
-            if (cho == 1) {
-                System.out.println("Enter new item ");
-                item = in.nextInt();
-                ob.push(item);
-            } else if (cho == 2) {
-                int t = ob.pop();
-                if (t != -1) {
-                    System.out.println("Popped element is " + t);
-                }
-            } else if (cho == 3) {
-                ob.peek();
-            } else if (cho == 4) {
-                break;
-            } else {
-                System.out.println("Invalid Choice! Try again.");
+            switch (cho) {
+                case 1:
+                    System.out.println("Enter new item ");
+                    item = in.nextInt();
+                    ob.push(item);
+                    break;
+                case 2:
+                    int t = ob.pop();
+                    if (t != -1) {
+                        System.out.println("Popped element is " + t);
+                    }
+                    break;
+                case 3:
+                    ob.peek();
+                    break;
+                case 4:
+                    System.out.println("\n\n\t\t Thank you");
+                    break;
+                default:
+                    System.out.println("Invalid Choice! Try again.");
             }
         }
-
-        System.out.println("\n\n\t\t Thank you");
         in.close();
     }
 }
