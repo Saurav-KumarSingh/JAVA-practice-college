@@ -2,21 +2,21 @@ import java.util.Scanner;
 
 class QueueMethods {
     int arr[] = new int[5];
-    int i = 0;
+    int front = 0,rear=-1;
 
     public int isFull() {
-        return i >= 5 ? 1 : -1;
+        return rear >= 4 ? 1 : -1;
     }
 
     public int isEmpty() {
-        return i == 0 ? 1 : -1;
+        return rear == -1 ? 1 : -1;
     }
 
     public void enqueue(int n) {
         if (isFull() == 1) {
             System.out.println("Overflow");
         } else {
-            arr[i++] = n;
+            arr[++rear] = n;
         }
     }
 
@@ -24,16 +24,13 @@ class QueueMethods {
         if (isEmpty() == 1) {
             System.out.println("Underflow");
         } else {
-            System.out.println("Deleted: " + arr[0]);
-            for (int j = 0; j < i - 1; j++) {
-                arr[j] = arr[j + 1];
-            }
-            i--;
+            System.out.println("Deleted: " + arr[front++]);
+            
         }
     }
 
     public void print() {
-        for (int j = 0; j < 5; j++) {
+        for (int j = front; j <5; j++) {
             System.out.print(arr[j] + " ");
         }
         System.out.println();
