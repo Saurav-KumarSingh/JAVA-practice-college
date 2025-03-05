@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 class My_Stack {
+    
     int[] a = new int[5]; // Initialize the stack array
     int top = -1;
 
@@ -27,21 +28,34 @@ class My_Stack {
         }
         System.out.println("Top element: " + a[top]);
     }
+
+    void printStack() {
+        if (top == -1) {
+            System.out.println("Stack is empty.");
+            return;
+        }
+        System.out.print("Stack elements (Top to Bottom): ");
+        for (int i = top; i >= 0; i--) {
+            System.out.print(a[i] + " ");
+        }
+        System.out.println();
+    }
 }
 
-class Main {
+class Stack {
     public static void main(String[] args) {
         System.out.println("\n\n\t\tSTACK OPERATION");
         Scanner in = new Scanner(System.in);
         My_Stack ob = new My_Stack();
         int cho = 0, item;
 
-        while (cho != 4) {
+        while (cho != 5) {
             System.out.println("1. Push ");
             System.out.println("2. Pop ");
             System.out.println("3. Peek ");
-            System.out.println("4. Exit ");
-            System.out.println("Enter your Choice [1,2,3,4] ....");
+            System.out.println("4. Print Stack ");
+            System.out.println("5. Exit ");
+            System.out.println("Enter your Choice [1,2,3,4,5] ....");
             cho = in.nextInt();
 
             switch (cho) {
@@ -60,6 +74,9 @@ class Main {
                     ob.peek();
                     break;
                 case 4:
+                    ob.printStack();
+                    break;
+                case 5:
                     System.out.println("\n\n\t\t Thank you");
                     break;
                 default:
