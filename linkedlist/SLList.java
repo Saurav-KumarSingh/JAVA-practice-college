@@ -27,6 +27,38 @@ class SingleLinkedListatEnd {
             tail = new_Node;  // Move tail to the new node
         }
     }
+    public void insertAtBegining(int value) {
+        Node new_Node = new Node(value);
+        if (head == null) { // First node
+            head = new_Node;
+            tail = new_Node;  // Also set tail to new_Node
+        } else { // Multiple nodes
+            new_Node.next=head;//refering first Node to existing Node
+            head=new_Node;//poiniting head to new Node
+        }
+    }
+
+    public void insertAtPosition(int position,int value) {
+        
+        if (position > lengthList() || position < 0) {
+            System.out.println("Invalid Position...");
+            return;
+        }
+        else if(position==lengthList()){
+            insertAtEnd(value);
+            return;
+        }else if (position==0) {
+            insertAtBegining(value);
+            return;
+        }
+        Node new_Node = new Node(value);
+        Node temp=head;
+        for (int i = 0; i < position-1; i++) {
+            temp=temp.next;
+        }
+        new_Node.next=temp.next;
+        temp.next=new_Node;
+    }
     
 
     public void showList() {
@@ -55,7 +87,7 @@ class SingleLinkedListatEnd {
     }
 }
 
-public class atEndSLL{
+public class SLList{
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         SingleLinkedListatEnd ob = new SingleLinkedListatEnd();
@@ -63,7 +95,7 @@ public class atEndSLL{
 
         while (true) {
             System.out.println("\n-------------------Menu---------------------------\n");
-            System.out.println("\n1. Insert\n2. Print\n3. List length\n4. Exit");
+            System.out.println("\n1. Insert at End\n2. Insert at Begining\n3. Insert at Position\n4. Print\n5. List length\n6. Exit");
             System.out.println("\n--------------------------------------------------\n");
             System.out.print("Enter Choice: ");
             int cho = in.nextInt();
@@ -74,14 +106,26 @@ public class atEndSLL{
                     ob.insertAtEnd(value);
                     break;
                 case 2:
+                    System.out.print("Enter data: ");
+                    value = in.nextInt();
+                    ob.insertAtBegining(value);
+                    break;
+                case 3:
+                    System.out.print("Enter data: ");
+                    value = in.nextInt();
+                    System.out.print("Enter position: ");
+                    int position = in.nextInt();
+                    ob.insertAtPosition(position, value);
+                    break;
+                
+                case 4:
                     System.out.println("List : ");
                     ob.showList();
                     break;
-                case 3:
-                    
+                case 5:
                     System.out.println("List Size : "+ob.lengthList());
                     break;
-                case 4:
+                case 6:
                     System.out.println("Exit...");
                     in.close(); // Close scanner
                     System.exit(0);
