@@ -17,7 +17,7 @@ class SingleLinkedListatEnd {
     Node head=null;
     Node tail=null;
 
-    public void insertAtEnd(int value) {
+    void insertAtEnd(int value) {
         Node new_Node = new Node(value);
         if (head == null) { // First node
             head = new_Node;
@@ -27,7 +27,8 @@ class SingleLinkedListatEnd {
             tail = new_Node;  // Move tail to the new node
         }
     }
-    public void insertAtBegining(int value) {
+    
+    void insertAtBegining(int value) {
         Node new_Node = new Node(value);
         if (head == null) { // First node
             head = new_Node;
@@ -38,7 +39,7 @@ class SingleLinkedListatEnd {
         }
     }
 
-    public void insertAtPosition(int position,int value) {
+    void insertAtPosition(int position,int value) {
         
         if (position > lengthList() || position < 0) {
             System.out.println("Invalid Position...");
@@ -60,8 +61,7 @@ class SingleLinkedListatEnd {
         temp.next=new_Node;
     }
     
-
-    public void showList() {
+    void showList() {
         Node temp = head;  
         if (temp == null) {
             System.out.println("List is Empty...");
@@ -72,7 +72,8 @@ class SingleLinkedListatEnd {
             temp = temp.next;
         } System.out.print("Null");
     }
-    public int lengthList() {
+    
+    int lengthList() {
         Node temp = head;  
         int count=0;
         if (temp == null) {
@@ -85,6 +86,23 @@ class SingleLinkedListatEnd {
         }
         return count;
     }
+
+    int getAt(int idx){
+        Node temp=head;
+        if (idx<=0 || idx> lengthList()) {
+            System.out.println("Invalid position...");
+            return -1;
+        }
+        else if (temp==null) {
+            System.out.println("List is Empty...");
+            return -1;
+        }
+        for (int i = 0; i < idx-1; i++) {
+            temp=temp.next;
+        }
+        return temp.data;
+    }
+
 }
 
 public class SLList{
@@ -95,7 +113,7 @@ public class SLList{
 
         while (true) {
             System.out.println("\n-------------------Menu---------------------------\n");
-            System.out.println("\n1. Insert at End\n2. Insert at Begining\n3. Insert at Position\n4. Print\n5. List length\n6. Exit");
+            System.out.println("\n1. Insert at End\n2. Insert at Begining\n3. Insert at Position\n4. Print\n5. List length\n6. get Node At\n7. Exit");
             System.out.println("\n--------------------------------------------------\n");
             System.out.print("Enter Choice: ");
             int cho = in.nextInt();
@@ -126,6 +144,11 @@ public class SLList{
                     System.out.println("List Size : "+ob.lengthList());
                     break;
                 case 6:
+                    System.out.print("Enter position: ");
+                    position = in.nextInt();
+                    System.out.println("Node data At : "+ob.getAt(position));
+                    break;
+                case 7:
                     System.out.println("Exit...");
                     in.close(); // Close scanner
                     System.exit(0);
