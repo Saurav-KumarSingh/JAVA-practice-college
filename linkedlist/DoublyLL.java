@@ -85,6 +85,70 @@ class DLLMethods {
         return temp.data;
     }
 
+    int deleteFromEnd(){
+        Node temp=head;
+        int result;
+        if (head==null) {
+            System.out.println("List is empty...");
+            return -1;
+        }else{
+            while (temp.next.next!=null) { 
+                temp=temp.next;
+            }
+            result=temp.next.data;
+            temp.next=null;
+            tail=temp;
+
+        }
+        size--;
+        return result;
+    }
+
+    int deleteFromPosition(int position) {
+        if (position >= size || position < 0) {  // Ensure position is within valid range
+            System.out.println("Invalid Position...");
+            return -1;
+        } 
+        if (position == size - 1) {  // Deleting the last node
+            return deleteFromEnd();
+        } 
+        if (position == 0) {  // Deleting the first node
+            return deleteFromBegin();
+        } 
+        if (head == null) {  // Check if the list is empty
+            System.out.println("Empty list...");
+            return -1;
+        }
+    
+        if (position < size / 2) {  
+            // Start from head if position is in the first half
+            Node temp = head;
+            for (int i = 0; i < position - 1; i++) {
+                temp = temp.next;
+            }
+            Node deletedNode = temp.next;
+            temp.next = temp.next.next;
+            if (temp.next != null) {
+                temp.next.prev = temp;
+            }
+            size--;
+            return deletedNode.data;
+        } else {  
+            // Start from tail if position is in the second half
+            Node temp = tail;
+            for (int i = size - 1; i > position + 1; i--) {
+                temp = temp.prev;
+            }
+            Node deletedNode = temp.prev;
+            temp.prev = temp.prev.prev;
+            if (temp.prev != null) {
+                temp.prev.next = temp;
+            }
+            size--;
+            return deletedNode.data;
+        }
+    }
+    
     void display() {
         Node temp = head;
         System.out.print("\nNull <=> ");
@@ -105,7 +169,7 @@ public class DoublyLL {
         while (true) {
             System.out.println("\n\n-------------------Menu---------------------------\n");
             System.out.println(
-                    "1. Insert at Begining\n2. Insert at End\n3. Insert at Position\n4. Delete from Bigining\n5. display \n6. Size\n7. Exit");
+                    "1. Insert at Begining\n2. Insert at End\n3. Insert at Position\n4. Delete from Bigining\n5. Delete from End\n6. Delete from Position\n7. display \n8. Size\n9. Exit");
             System.out.println("\n--------------------------------------------------\n");
             System.out.print("Enter Choice: ");
             int cho = in.nextInt();
@@ -134,13 +198,21 @@ public class DoublyLL {
                     System.out.println("Deleted : "+ob.deleteFromBegin());
                     break;
                 case 5:
+                    System.out.println("Deleted : "+ob.deleteFromEnd());
+                    break;
+                case 6:
+                    System.out.print("Enter position: ");
+                    position = in.nextInt();
+                    System.out.println("Deleted : "+ob.deleteFromPosition(position));
+                    break;
+                case 7:
                     ob.display();
                     break;
 
-                case 6:
+                case 8:
                     System.out.println("Size : "+ob.size);
                     break;
-                case 7:
+                case 9:
                     System.out.println("Exit...");
                     in.close(); // Close scanner
                     System.exit(0);
