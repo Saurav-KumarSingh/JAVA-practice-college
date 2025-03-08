@@ -1,12 +1,16 @@
 import java.util.Scanner;
 
 class My_Stack {
-    
-    int[] a = new int[5]; // Initialize the stack array
+    int[] a; // Initialize the stack array
     int top = -1;
 
+    // Constructor to set the size of the stack
+    My_Stack(int size) {
+        a = new int[size];
+    }
+
     void push(int item) {
-        if (top >= 4) {  // Maximum index for size 5
+        if (top >= a.length - 1) {
             System.out.println("OverFlow..");
             return;
         }
@@ -46,15 +50,21 @@ class Stack {
     public static void main(String[] args) {
         System.out.println("\n\n\t\tSTACK OPERATION");
         Scanner in = new Scanner(System.in);
-        My_Stack ob = new My_Stack();
+
+        System.out.println("Enter the size of the stack:");
+        int size = in.nextInt();
+        My_Stack ob = new My_Stack(size);
+
         int cho = 0, item;
 
         while (cho != 5) {
+            System.out.println("---------------menu-----------------");
             System.out.println("1. Push ");
             System.out.println("2. Pop ");
             System.out.println("3. Peek ");
             System.out.println("4. Print Stack ");
             System.out.println("5. Exit ");
+            System.out.println("---------------menu-----------------\n");
             System.out.println("Enter your Choice [1,2,3,4,5] ....");
             cho = in.nextInt();
 
