@@ -49,29 +49,43 @@ class SingleLinkedListatEnd {
             return;
         }
 
-        Node temp = head;
-        int size = 0;
+        // Node temp = head;
+        // int size = 0;
 
-        // Calculate the size of the list
-        while (temp != null) {
-            temp = temp.next;
-            size++;
+        // // Calculate the size of the list
+        // while (temp != null) {
+        //     temp = temp.next;
+        //     size++;
+        // }
+
+        // // Validate N
+        // if (n > size || n <= 0) {
+        //     System.out.println("Invalid Nth Node position...");
+        //     return;
+        // }
+
+        // temp = head;
+        // // Find the (size-n)th node from start
+        // int nthFromEnd = size - n+1;
+        // for (int i = 0; i < nthFromEnd-1; i++) {  
+        //     temp = temp.next;
+        // }
+
+
+        //using 2 pointers approach or only 1 traversal needed
+
+        Node slow=head;
+        Node fast=head;
+        for (int i = 0; i < n; i++) {
+            if (fast==null) System.out.println("Invalid Nth Node position...");
+            fast=fast.next;
         }
 
-        // Validate N
-        if (n > size || n <= 0) {
-            System.out.println("Invalid Nth Node position...");
-            return;
+        while (fast!=null) { 
+            fast=fast.next;
+            slow=slow.next;
         }
-
-        temp = head;
-        // Find the (size-n)th node from start
-        int nthFromEnd = size - n+1;
-        for (int i = 0; i < nthFromEnd-1; i++) {  
-            temp = temp.next;
-        }
-
-        System.out.println(n + "th node from end: " + temp.info);
+        System.out.println(n + "th node from end: "+slow.info);
     }
 }
 
