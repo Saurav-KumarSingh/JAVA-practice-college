@@ -62,6 +62,11 @@ class SingleLinkedListatEnd {
             fast=fast.next;
         }
 
+        if (fast == null) {//list have only one node
+            System.out.println(n + "th node from end deleted: " + head.info);
+            head = head.next;
+            return;
+        }
         while (fast.next!=null) { 
             fast=fast.next;
             slow=slow.next;
