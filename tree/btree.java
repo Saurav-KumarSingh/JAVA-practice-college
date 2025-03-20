@@ -46,9 +46,9 @@ class BinaryTree {
     }
 
     private void inorderPrint(Node root) {
-        if (root != null) {
+        if (root!=null) {
             inorderPrint(root.left);
-            System.out.print(root.data + " ");
+            System.out.print(root.data+" ");
             inorderPrint(root.right);
         }
     }
