@@ -112,6 +112,15 @@ class BinarySearchTree {
             return findNode(root.right, value);
         }
     }
+
+    public int size(Node root) {
+        if (root==null) return 0;
+        return 1+size(root.left)+size(root.right);
+    }
+    public int sumOfNodes(Node root){
+        if (root==null) return 0;
+        return root.data+sumOfNodes(root.left)+sumOfNodes(root.right);
+    }
 }
 
 public class bst {
@@ -122,7 +131,7 @@ public class bst {
 
         while (true) {
             System.out.println("\n1. Insert\n2. In-order Traversal\n3. Pre-order Traversal\n4. Post-order Traversal");
-            System.out.println("5. Find Minimum\n6. Find Maximum\n7. Search Value\n8. Exit");
+            System.out.println("5. Find Minimum\n6. Find Maximum\n7. Search Value\n8. Size\n9. Sum of Nodes\n10. Exit...");
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
 
@@ -159,7 +168,11 @@ public class bst {
                         System.out.println("Value not found in the tree.");
                     }
                     break;
-                case 8:
+                case 8:System.out.println("Tree Size :"+tree.size(tree.root));
+                    break;
+                case 9:System.out.println("Sum of Nodes :"+tree.sumOfNodes(tree.root));
+                    break;
+                case 10:
                     System.out.println("Exiting...");
                     sc.close();
                     return;
