@@ -94,6 +94,11 @@ class BinarySearchTree {
         return current.data;
     }
 
+    //findMax for general binary tree
+    // public int max(Node root){
+    //     if(root==null) return Integer.MIN_VALUE;
+    //     return Math.max(root.data,Math.max(max(root.left),max(root.right)));
+    // }
     // Search for a value in the BST
     public boolean find(int value) {
         return findNode(root, value);
@@ -121,9 +126,33 @@ class BinarySearchTree {
         if (root==null) return 0;
         return root.data+sumOfNodes(root.left)+sumOfNodes(root.right);
     }
+
+    public int heightOfTree(Node root){
+        if (root==null || (root.left==null && root.right==null))  return 0;
+        return 1+Math.max(heightOfTree(root.left), heightOfTree(root.right));
+    }
+    public void PrintNthLevelElements(Node root,int n){
+        if (root==null) {
+            return;
+        }
+        if (n==1) {
+            System.out.println(root.data);
+            return;
+        }
+        PrintNthLevelElements(root.left, n-1);
+        PrintNthLevelElements(root.right, n-1);
+    }
+
+    public void levelOrderPrint(){
+        int i=1;
+        while(i<=size(root)){
+           PrintNthLevelElements(root, i); 
+           i++;
+        }
+    }
 }
 
-public class bst {
+public class bst{
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
         Scanner sc = new Scanner(System.in);
@@ -131,7 +160,7 @@ public class bst {
 
         while (true) {
             System.out.println("\n1. Insert\n2. In-order Traversal\n3. Pre-order Traversal\n4. Post-order Traversal");
-            System.out.println("5. Find Minimum\n6. Find Maximum\n7. Search Value\n8. Size\n9. Sum of Nodes\n10. Exit...");
+            System.out.println("5. Find Minimum\n6. Find Maximum\n7. Search Value\n8. Size\n9. Sum of Nodes\n10. Height of tree\n11. print Nth level elements\n12. Level-Order Traversal\n13. Exit...");
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
 
@@ -172,7 +201,17 @@ public class bst {
                     break;
                 case 9:System.out.println("Sum of Nodes :"+tree.sumOfNodes(tree.root));
                     break;
-                case 10:
+                case 10:System.out.println("height of tree :"+tree.heightOfTree(tree.root));
+                    break;
+                case 11:
+                    System.out.println("Enter level : ");
+                    int level=sc.nextInt();
+                    tree.PrintNthLevelElements(tree.root, level);
+                    break;
+                case 12:
+                    tree.levelOrderPrint();
+                    break;
+                case 13:
                     System.out.println("Exiting...");
                     sc.close();
                     return;
